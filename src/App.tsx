@@ -15,25 +15,25 @@ import { AddNodeForm } from "./components/AddNodeForm/AddNodeForm";
 import "./App.css";
 import "@xyflow/react/dist/style.css";
 
-export type TextNode = Node<{ text: string }, "text">;
+export type TextNode = Node<{ text: string; completed: boolean }, "text">;
 const initialNodes: TextNode[] = [
   {
     id: "1",
     position: { x: 0, y: 0 },
     type: "text",
-    data: { text: "1" },
+    data: { text: "1", completed: false },
   },
   {
     id: "2",
     position: { x: 0, y: 100 },
     type: "text",
-    data: { text: "2" },
+    data: { text: "2", completed: false },
   },
   {
     id: "3",
     position: { x: 0, y: 200 },
     type: "text",
-    data: { text: "3" },
+    data: { text: "3", completed: false },
   },
 ];
 
@@ -70,7 +70,7 @@ const createNewNode = (label?: string): TextNode => {
     id: getNewId(),
     position: { x: 0, y: 0 },
     type: "text",
-    data: { text: label || "" },
+    data: { text: label || "", completed: false },
   };
 };
 
