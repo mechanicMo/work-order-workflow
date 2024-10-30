@@ -15,25 +15,30 @@ import { AddNodeForm } from "./components/AddNodeForm/AddNodeForm";
 import "./App.css";
 import "@xyflow/react/dist/style.css";
 
-export type TextNode = Node<{ text: string; completed: boolean }, "text">;
+type WorkOrder = {
+  name: string;
+  quantity: number;
+  completed: boolean;
+};
+export type TextNode = Node<WorkOrder, "text">;
 const initialNodes: TextNode[] = [
   {
     id: "1",
     position: { x: 0, y: 0 },
     type: "text",
-    data: { text: "1", completed: false },
+    data: { name: "rocket", quantity: 2, completed: false },
   },
   {
     id: "2",
     position: { x: 0, y: 100 },
     type: "text",
-    data: { text: "2", completed: false },
+    data: { name: "fuel", quantity: 3, completed: false },
   },
   {
     id: "3",
     position: { x: 0, y: 200 },
     type: "text",
-    data: { text: "3", completed: false },
+    data: { name: "nuts and bolts", quantity: 4, completed: false },
   },
 ];
 
@@ -65,14 +70,12 @@ const initialEdges: EdgeType[] = [
 ];
 
 const getNewId = () => `node_${+new Date()}`;
-const createNewNode = (label?: string): TextNode => {
-  return {
-    id: getNewId(),
-    position: { x: 0, y: 0 },
-    type: "text",
-    data: { text: label || "", completed: false },
-  };
-};
+const createNewNode = (name = "", quantity = 1): TextNode => ({
+  id: getNewId(),
+  position: { x: 0, y: 0 },
+  type: "text",
+  data: { name, quantity, completed: false },
+});
 
 function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -86,8 +89,9 @@ function App() {
   const addNewNode = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       const formData = new FormData(event.currentTarget);
-      const label = formData.get("nodeLabel") || "";
-      const node = createNewNode(label as string); // i would use zod
+      const name = (formData.get("name") || "") as string; // i would use zod
+      const quantity = (formData.get("quantity") || 1) as number; // i would use zod
+      const node = createNewNode(name, quantity);
       setNodes((nds) => [...nds, node]);
     },
     [setNodes]

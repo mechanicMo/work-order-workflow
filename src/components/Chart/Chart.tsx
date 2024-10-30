@@ -7,7 +7,7 @@ import {
   useReactFlow,
 } from "@xyflow/react";
 import type { EdgeType, TextNode as TextNodeType } from "../../App";
-import { TextNode } from "../TextNode";
+import { TextNode } from "../TextNode/TextNode";
 import { useCallback, useEffect, useState } from "react";
 
 const storageKey = "hadrian-flow";

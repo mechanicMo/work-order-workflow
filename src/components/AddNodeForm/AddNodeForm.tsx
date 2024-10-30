@@ -13,16 +13,19 @@ export const AddNodeForm: React.FC<Props> = ({ addNewNode }) => {
         addNewNode(e);
       }}
     >
-      <label htmlFor="nodeLabel" className={styles.label}>
-        Label (optional)
+      <label htmlFor="name" className={styles.label}>
+        Name
+      </label>
+      <input type="text" id="name" name="name" className={styles.input} />
+
+      <label htmlFor="quantity" className={styles.label}>
+        Quantity
       </label>
       <input
-        type="text"
-        id="nodeLabel"
-        name="nodeLabel"
+        type="number"
+        id="quantity"
+        name="quantity"
         className={styles.input}
-        placeholder="custom label"
-        aria-label="Node label"
       />
 
       <button type="submit" className={styles.button}>
