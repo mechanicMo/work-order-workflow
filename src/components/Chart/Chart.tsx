@@ -12,10 +12,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 
 let nodeId = 0;
-const getNextId = () => {
-  nodeId++;
-  return nodeId.toString();
-};
+const getNextId = () => `${nodeId++}`;
 
 const initialNodes = [
   {
