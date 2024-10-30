@@ -1,13 +1,18 @@
 import styles from "./form.module.css";
 
 interface Props {
-  addNewNode: () => void;
-  nodeId: number;
+  addNewNode: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export const AddNodeForm: React.FC<Props> = ({ addNewNode, nodeId }) => {
+export const AddNodeForm: React.FC<Props> = ({ addNewNode }) => {
   return (
-    <form className={styles.form}>
+    <form
+      className={styles.form}
+      onSubmit={(e) => {
+        e.preventDefault();
+        addNewNode(e);
+      }}
+    >
       <label htmlFor="nodeLabel" className={styles.label}>
         Label (optional)
       </label>
@@ -16,11 +21,11 @@ export const AddNodeForm: React.FC<Props> = ({ addNewNode, nodeId }) => {
         id="nodeLabel"
         name="nodeLabel"
         className={styles.input}
-        placeholder={`${nodeId + 1}`}
+        placeholder="custom label"
         aria-label="Node label"
       />
 
-      <button type="button" className={styles.button} onClick={addNewNode}>
+      <button type="submit" className={styles.button}>
         Click to add a new node
       </button>
     </form>

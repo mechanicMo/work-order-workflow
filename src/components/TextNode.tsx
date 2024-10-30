@@ -21,7 +21,6 @@ export const TextNode = memo(
           borderRadius: 10,
         }}
       >
-        <div>node {id}</div>
         <div style={{ marginTop: 5 }}>
           <input
             onChange={(evt) => updateNodeData(id, { text: evt.target.value })}

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, type MouseEventHandler } from "react";
 import {
   addEdge,
   MarkerType,
@@ -6,6 +6,7 @@ import {
   useNodesState,
   type OnConnect,
   Node,
+  ReactFlowProvider,
 } from "@xyflow/react";
 
 import { Chart } from "./components/Chart";
@@ -63,20 +64,13 @@ const initialEdges: EdgeType[] = [
   },
 ];
 
-let nodeId = 3; // last id from initialNodes
-const getNextId = () => {
-  nodeId++;
-  return `${nodeId}`;
-};
-
-const createNewNode = (): TextNode => {
-  const id = getNextId();
-
+const getNewId = () => `node_${+new Date()}`;
+const createNewNode = (label?: string): TextNode => {
   return {
-    id,
+    id: getNewId(),
     position: { x: 0, y: 0 },
     type: "text",
-    data: { text: id },
+    data: { text: label || "" },
   };
 };
 
@@ -89,16 +83,33 @@ function App() {
     [setEdges]
   );
 
-  const addNewNode = useCallback(() => {
-    const node = createNewNode();
-    setNodes((nds) => [...nds, node]);
-  }, [setNodes]);
+  const addNewNode = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      const formData = new FormData(event.currentTarget);
+      const label = formData.get("nodeLabel") || "";
+      const node = createNewNode(label as string); // i would use zod
+      setNodes((nds) => [...nds, node]);
+    },
+    [setNodes]
+  );
 
   return (
     <>
-      <AddNodeForm addNewNode={addNewNode} nodeId={nodeId} />
+      <AddNodeForm addNewNode={addNewNode} />
 
-      <Chart {...{ nodes, onNodesChange, edges, onEdgesChange, onConnect }} />
+      <ReactFlowProvider>
+        <Chart
+          {...{
+            nodes,
+            setNodes,
+            onNodesChange,
+            edges,
+            setEdges,
+            onEdgesChange,
+            onConnect,
+          }}
+        />
+      </ReactFlowProvider>
     </>
   );
 }
