@@ -11,22 +11,19 @@ import ReactFlow, {
 
 import "reactflow/dist/style.css";
 
-let nodeId = 0;
-const getNextId = () => `${nodeId++}`;
-
 const initialNodes = [
   {
-    id: getNextId(),
+    id: "1",
     position: { x: 0, y: 0 },
     data: { label: "1" },
   },
   {
-    id: getNextId(),
+    id: "2",
     position: { x: 0, y: 100 },
     data: { label: "2" },
   },
   {
-    id: getNextId(),
+    id: "3",
     position: { x: 0, y: 200 },
     data: { label: "3" },
   },
@@ -49,6 +46,9 @@ const initialEdges = [
     },
   },
 ];
+
+let nodeId = 3; // last id from initialNodes
+const getNextId = () => `${nodeId++}`;
 
 const createNewNode = (): Node => {
   const id = getNextId();
