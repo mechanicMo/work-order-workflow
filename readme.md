@@ -1,3 +1,6 @@
+npm i
+npm run dev
+
 notes:
 
 - Very little styling has been applied
