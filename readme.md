@@ -13,5 +13,8 @@ notes:
 - Starting position could be more meaningful
 
 - Marking incomplete can have different approaches
+
   - mark everything down the tree incomplete and notify user
   - leave other nodes as is
+
+- What are all the styles in App.css for?
