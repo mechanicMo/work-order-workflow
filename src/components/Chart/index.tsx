@@ -1,3 +1,1 @@
-import { Chart } from './Chart';
-
-export { Chart };
+export { Chart } from "./Chart";
