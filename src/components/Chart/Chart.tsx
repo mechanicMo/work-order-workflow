@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import ReactFlow, {
   addEdge,
   MarkerType,
@@ -72,13 +72,18 @@ export const Chart = () => {
     [setEdges]
   );
 
-  const addNewNode = () => {
+  const addNewNode = useCallback(() => {
     const node = createNewNode();
     setNodes((nds) => [...nds, node]);
-  };
+  }, [setNodes]);
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
       <button onClick={addNewNode}>click to add a new node</button>
 
       <ReactFlow
