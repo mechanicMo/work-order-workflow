@@ -5,6 +5,7 @@ import {
   useEdgesState,
   useNodesState,
   type OnConnect,
+  Node,
 } from "@xyflow/react";
 
 import { Chart } from "./components/Chart";
@@ -13,31 +14,25 @@ import { AddNodeForm } from "./components/AddNodeForm/AddNodeForm";
 import "./App.css";
 import "@xyflow/react/dist/style.css";
 
-export type NodeType = {
-  id: string;
-  position: {
-    x: number;
-    y: number;
-  };
-  data: {
-    label: string;
-  };
-};
-const initialNodes: NodeType[] = [
+export type TextNode = Node<{ text: string }, "text">;
+const initialNodes: TextNode[] = [
   {
     id: "1",
     position: { x: 0, y: 0 },
-    data: { label: "1" },
+    type: "text",
+    data: { text: "1" },
   },
   {
     id: "2",
     position: { x: 0, y: 100 },
-    data: { label: "2" },
+    type: "text",
+    data: { text: "2" },
   },
   {
     id: "3",
     position: { x: 0, y: 200 },
-    data: { label: "3" },
+    type: "text",
+    data: { text: "3" },
   },
 ];
 
@@ -74,13 +69,14 @@ const getNextId = () => {
   return `${nodeId}`;
 };
 
-const createNewNode = () => {
+const createNewNode = (): TextNode => {
   const id = getNextId();
 
   return {
     id,
     position: { x: 0, y: 0 },
-    data: { label: id },
+    type: "text",
+    data: { text: id },
   };
 };
 

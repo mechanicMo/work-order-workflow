@@ -4,11 +4,16 @@ import {
   type OnNodesChange,
   type OnEdgesChange,
 } from "@xyflow/react";
-import type { EdgeType, NodeType } from "../../App";
+import type { EdgeType, TextNode as TextNodeType } from "../../App";
+import { TextNode } from "../TextNode";
+
+const nodeTypes = {
+  text: TextNode,
+};
 
 interface Props {
-  nodes: NodeType[];
-  onNodesChange: OnNodesChange<NodeType>;
+  nodes: TextNodeType[];
+  onNodesChange: OnNodesChange<TextNodeType>;
   edges: EdgeType[];
   onEdgesChange: OnEdgesChange<EdgeType>;
   onConnect: OnConnect;
@@ -34,6 +39,7 @@ export const Chart: React.FC<Props> = ({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        nodeTypes={nodeTypes}
       />
     </div>
   );
